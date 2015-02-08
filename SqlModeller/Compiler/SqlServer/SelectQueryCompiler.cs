@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using SqlModeller.Compiler.Model;
+using SqlModeller.Compiler.SqlServer.HavingCompilers;
 using SqlModeller.Compiler.SqlServer.SelectComilers;
 using SqlModeller.Compiler.SqlServer.WhereCompilers;
 using SqlModeller.Interfaces;
@@ -158,7 +159,29 @@ namespace SqlModeller.Compiler.SqlServer
 
         public virtual string CompileHaving(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
-            return null;
+            if (!selectQuery.HavingFilters.Any())
+            {
+                return null;
+            }
+
+            var result = "HAVING ";
+
+            var operatorString = selectQuery.HavingFilters.GroupingOperator.ToSqlString();
+
+            var havingCompiler = new HavingFilterCompiler();
+
+            bool first = true;
+            foreach (var having in selectQuery.HavingFilters)
+            {
+                result += string.Format("\n\t {0} {1}",
+                            !first ? operatorString : null,
+                            havingCompiler.Compile(having, selectQuery, parameters)
+                          );
+
+                first = false;
+            }
+
+            return result;
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using SqlModeller.Model;
+using SqlModeller.Model.Having;
 using SqlModeller.Model.Where;
 using SqlModeller.Shorthand;
 
@@ -13,9 +14,9 @@ namespace SqlModellerTests
         [Test]
         public void TestShorthand()
         {
-            var campaignTable = new Table("c", "Campaign");
-            var facebookCampaignTable = new Table("fc", "FacebookCampaign");
-            var adGroupTable = new Table("ag", "AdGroup");
+            var countryTable = new Table("c", "Country");
+            var teamTable = new Table("t", "Team");
+            var playerTable = new Table("p", "Player");
 
             var cteQuery = new SelectQuery()
 
@@ -25,29 +26,37 @@ namespace SqlModellerTests
                     .SelectGroupKey("_GROUP_KEY")
                     .Select("1 as ONE")
                     .SelectAll()
-                    .Select(campaignTable, "ID", "C_ID", Aggregate.Min) // should not aggregate, its the group by
-                    .Select(facebookCampaignTable, "ID", "FC_ID", Aggregate.Min)
-                    .Select(facebookCampaignTable, "NAME", "FC_NAME", Aggregate.Avg)
-                    .Select(adGroupTable, "NAME", "AG_NAME", Aggregate.Sum)
+                    .Select(countryTable, "ID", "C_ID", Aggregate.Min) // should not aggregate, its the group by
+                    .Select(teamTable, "ID", "T_ID", Aggregate.Min)
+                    .Select(teamTable, "Name", "T_NAME", Aggregate.Avg)
+                    .Select(playerTable, "Name", "P_NAME", Aggregate.Sum)
             // FROM
-                .From(campaignTable)
-                    .LeftJoin(facebookCampaignTable, "CampaignID", campaignTable, "ID")
-                    .Join(adGroupTable, "CampaignID", campaignTable, "ID", JoinType.InnerJoin, "AND 1 = 0")
+                .From(countryTable)
+                    .LeftJoin(teamTable, "CountryID", countryTable, "ID")
+                    .Join(playerTable, "TeamID", teamTable, "ID", JoinType.InnerJoin, "AND 1 = 1")
             // WHERE
                 .Where(Combine.And)
-                    .WhereColumnColumn(facebookCampaignTable, "ID", Compare.NotEqual, campaignTable, "ID")
-                    .WhereCollection(Combine.Or,new WhereFilterCollection()
-                        .WhereColumnColumn(facebookCampaignTable, "Value1", Compare.GreaterThan, campaignTable, "Value2")
-                        .WhereColumnValue(facebookCampaignTable, "Value3", Compare.LessThan, 1)
+                    .Where("p.Name IS NOT NULL")
+                    .WhereColumnColumn(teamTable, "ID", Compare.NotEqual, countryTable, "ID")
+                    .WhereColumnValue(teamTable, "FirstName", Compare.NotEqual, "Peter")
+                    .WhereColumnValue(playerTable, "StartDate", Compare.NotEqual, DateTime.Now)
+                    .WhereCollection(Combine.Or, new WhereFilterCollection()
+                        .WhereColumnColumn(teamTable, "Value1", Compare.GreaterThan, countryTable, "Value2")
+                        .WhereColumnValue(teamTable, "Value3", Compare.LessThan, 1)
                     )
-                    .WhereColumnValue(facebookCampaignTable.Alias, "Value3", Compare.NotEqual, "HELLO")
-                    .WhereColumnValue(facebookCampaignTable.Alias, "StartDate", Compare.NotEqual, DateTime.Now)
-                    .Where("fc.Name IS NOT NULL")
             // GROUP BY
-                .GroupBy(campaignTable, "ID")
+                .GroupBy(countryTable, "ID")
+            // Having
+                .Having(Combine.And)
+                    .Having("SUM(t.Points) > 4")
+                    .HavingColumnValue(Aggregate.Sum, playerTable, "Goals", Compare.GreaterThan, 10)
+                    .HavingCollection(Combine.Or,new HavingFilterCollection()
+                        .HavingColumnValue(Aggregate.Min, playerTable, "RedCards", Compare.GreaterThan, 1)
+                        .HavingColumnValue(Aggregate.Max, playerTable, "RedCards", Compare.LessThan, 5)
+                    )
             // ORDER BY
-                .OrderBy(campaignTable, "ID", OrderDir.Asc)
-                       .OrderByDesc(adGroupTable, "ID");
+                .OrderBy(countryTable, "ID", OrderDir.Asc)
+                       .OrderByDesc(playerTable, "ID");
 
             var cte = new CommonTableExpression()
                       {

@@ -47,7 +47,13 @@
     <Compile Include="Compiler\QueryParameterManagers\QueryParameterManager.cs" />
     <Compile Include="Compiler\SqlServer\ParameterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\SelectComilers\SqlColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\HavingCompilers\ColumnValueHavingFilterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\HavingCompilers\SqlHavingFilterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCollectionCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
+    <Compile Include="Interfaces\IHavingCompiler.cs" />
+    <Compile Include="Interfaces\IHavingFilter.cs" />
     <Compile Include="Interfaces\IQueryParameterManager.cs" />
     <Compile Include="Compiler\SqlServer\CommmonTableExpressionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\Base\CompilerRegistry.cs" />
@@ -80,6 +86,10 @@
     <Compile Include="Model\Select\RowNumberColumnSelector.cs" />
     <Compile Include="Model\Select\SqlColumnSelector.cs" />
     <Compile Include="Model\Select\TotalColumnSelector.cs" />
+    <Compile Include="Model\Having\ColumnColumnHavingFilter.cs" />
+    <Compile Include="Model\Having\ColumnValueHavingFilter.cs" />
+    <Compile Include="Model\Having\SqlWhereHavingFilter.cs" />
+    <Compile Include="Model\Having\HavingFilterCollection.cs" />
     <Compile Include="Model\Where\ColumnColumnWhereFilter.cs" />
     <Compile Include="Model\Where\ColumnValueWhereFilter.cs" />
     <Compile Include="Model\CommonTableExpression.cs" />
@@ -106,6 +116,7 @@
     <Compile Include="Shorthand\SelectExtensions.cs" />
     <Compile Include="Shorthand\OrderByExtensions.cs" />
     <Compile Include="Shorthand\GroupByExtensions.cs" />
+    <Compile Include="Shorthand\HavingExtensions.cs" />
     <Compile Include="Shorthand\WhereExtensions.cs" />
   </ItemGroup>
   <ItemGroup />

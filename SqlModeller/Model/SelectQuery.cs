@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SqlModeller.Interfaces;
 using SqlModeller.Model.From;
+using SqlModeller.Model.Having;
 using SqlModeller.Model.Order;
 using SqlModeller.Model.Where;
 
@@ -14,6 +15,7 @@ namespace SqlModeller.Model
             TableJoins = new List<TableJoin>();
             GroupByColumns = new List<Column>();
             WhereFilters = new WhereFilterCollection();
+            HavingFilters = new HavingFilterCollection();
             OrderByColumns = new List<OrderByColumn>();
         }
 
@@ -23,10 +25,9 @@ namespace SqlModeller.Model
         public List<Column> GroupByColumns { get; set; }
         public List<OrderByColumn> OrderByColumns { get; set; }
         public WhereFilterCollection WhereFilters { get; set; }
+        public HavingFilterCollection HavingFilters { get; set; }
 
         public int? RowOffset { get; set; }
         public int? RowLimit { get; set; }
-
-     
     }
 }
