@@ -10,10 +10,11 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
         {
             registeredCompilers = new List<IWhereCompiler>()
             {
+                new SqlWhereFilterCompiler(),
                 new ColumnColumnWhereFilterCompiler(),
                 new ColumnValueWhereFilterCompiler(),
                 new WhereFilterCollectionCompiler(),
-                new SqlWhereFilterCompiler(),
+                new ColumnLikeWhereFilterCompiler(),
             };
         } 
     }

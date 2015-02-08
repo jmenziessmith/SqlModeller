@@ -37,8 +37,10 @@ namespace SqlModellerTests
             // WHERE
                 .Where(Combine.And)
                     .Where("p.Name IS NOT NULL")
+                    .WhereColumnLike(teamTable, "Name", "F.C.", LikeMode.WildcardLeft)
+                    .WhereColumnLike(teamTable, "Description", "\"premier league\" -winners", LikeMode.FreeText)
                     .WhereColumnColumn(teamTable, "ID", Compare.NotEqual, countryTable, "ID")
-                    .WhereColumnValue(teamTable, "FirstName", Compare.NotEqual, "Peter")
+                    .WhereColumnValue(playerTable, "FirstName", Compare.NotEqual, "Peter")
                     .WhereColumnValue(playerTable, "StartDate", Compare.NotEqual, DateTime.Now)
                     .WhereCollection(Combine.Or, new WhereFilterCollection()
                         .WhereColumnColumn(teamTable, "Value1", Compare.GreaterThan, countryTable, "Value2")

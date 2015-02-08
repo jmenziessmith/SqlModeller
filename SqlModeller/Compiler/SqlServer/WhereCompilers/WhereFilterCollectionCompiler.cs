@@ -26,7 +26,7 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
             foreach (var where in whereFilters)
             {
 
-                result += string.Format("\n\t {0} {1}",
+                result += string.Format("\n\t {0} {1} ",
                             !first ? operatorString : null,
                             whereCompiler.Compile(where, selectQuery,parameters)
                           );

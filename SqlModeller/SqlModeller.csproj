@@ -51,6 +51,8 @@
     <Compile Include="Compiler\SqlServer\HavingCompilers\SqlHavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\ToStringHelper.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnLikeWhereFilter.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
     <Compile Include="Interfaces\IHavingCompiler.cs" />
     <Compile Include="Interfaces\IHavingFilter.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCompiler.cs" />
     <Compile Include="Model\Aggregate.cs" />
     <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\LikeMode.cs" />
     <Compile Include="Model\Order\OrderByColumn.cs" />
     <Compile Include="Model\OrderDir.cs" />
     <Compile Include="Interfaces\IColumnSelector.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Model\From\TableJoin.cs" />
     <Compile Include="Interfaces\IWhereFilter.cs" />
     <Compile Include="Model\Where\SqlWhereFilter.cs" />
+    <Compile Include="Model\Where\ColumnLikeWhereFilter.cs" />
     <Compile Include="Model\Where\WhereFilterCollection.cs" />
     <Compile Include="Model\Compare.cs" />
     <Compile Include="Model\Combine.cs" />

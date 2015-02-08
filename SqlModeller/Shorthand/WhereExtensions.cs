@@ -75,6 +75,35 @@ namespace SqlModeller.Shorthand
         }
 
 
+        // WHERE LIKE
+        public static SelectQuery WhereColumnLike(this SelectQuery query, Table leftTable, string leftField, string text, LikeMode mode = LikeMode.Default)
+        {
+            query.WhereFilters.WhereColumnLike(leftTable, leftField, text, mode);
+            return query;
+        }
+        public static SelectQuery WhereColumnLike(this SelectQuery query, string leftTableAlias, string leftField, string text, LikeMode mode = LikeMode.Default)
+        {
+            query.WhereFilters.WhereColumnLike(leftTableAlias, leftField, text, mode);
+            return query;
+        }
+
+        public static WhereFilterCollection WhereColumnLike(this WhereFilterCollection query, Table leftTable, string leftField, string text, LikeMode mode = LikeMode.Default)
+        {
+            query.WhereColumnLike(leftTable.Alias, leftField, text, mode);
+            return query;
+        }
+        public static WhereFilterCollection WhereColumnLike(this WhereFilterCollection query, string leftTableAlias, string leftField, string text, LikeMode mode = LikeMode.Default)
+        {
+            query.Add(new ColumnLikeWhereFilter()
+                      {
+                          LeftColumn = new Column(leftTableAlias, leftField),
+                          LikeMode = mode,
+                          Text = text
+                      });
+            return query;
+        }
+
+
         // WHERE COLUMN VALUE
  
         public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType)

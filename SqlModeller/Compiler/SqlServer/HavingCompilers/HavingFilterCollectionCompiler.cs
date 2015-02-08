@@ -25,7 +25,7 @@ namespace SqlModeller.Compiler.SqlServer.HavingCompilers
             foreach (var Having in havingFilters)
             {
 
-                result += string.Format("\n\t {0} {1}",
+                result += string.Format("\n\t {0} {1} ",
                             !first ? operatorString : null,
                             HavingCompiler.Compile(Having, selectQuery,parameters)
                           );

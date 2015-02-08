@@ -10,9 +10,9 @@ namespace SqlModeller.Compiler.SqlServer.HavingCompilers
         {
             registeredCompilers = new List<IHavingCompiler>()
             { 
+                new SqlHavingFilterCompiler(),
                 new ColumnValueHavingFilterCompiler(),
                 new HavingFilterCollectionCompiler(),
-                new SqlHavingFilterCompiler(),
             };
         } 
     }
