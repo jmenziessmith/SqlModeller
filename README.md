@@ -1,2 +1,2 @@
-# SqlModdler
+# SqlModeller
 Sql Statement Builder
