@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B6F37CCB-B860-4F19-982F-1F66D7188BEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SqlModeller</RootNamespace>
+    <AssemblyName>SqlModeller</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiler\Model\CompiledQueryParameter.cs" />
+    <Compile Include="Compiler\QueryParameterManagers\NoQueryParameterManager.cs" />
+    <Compile Include="Compiler\QueryParameterManagers\QueryParameterManager.cs" />
+    <Compile Include="Compiler\SqlServer\ParameterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\SqlColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
+    <Compile Include="Interfaces\IQueryParameterManager.cs" />
+    <Compile Include="Compiler\SqlServer\CommmonTableExpressionCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\Base\CompilerRegistry.cs" />
+    <Compile Include="Compiler\Model\CompiledCommonTableExpression.cs" />
+    <Compile Include="Compiler\Model\CompiledQuery.cs" />
+    <Compile Include="Compiler\Model\CompiledSelectQuery.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\ColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\GroupByColumnSelectorCompiler.cs" />
+    <Compile Include="Interfaces\IColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\SelectColumnsCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\AllColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\SelectCountColumnCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\RowNumberColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectComilers\TotalColumnSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnColumnWhereFilterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnValueWhereFilterCompiler.cs" />
+    <Compile Include="Interfaces\ISqlStatementCompiler.cs" />
+    <Compile Include="Interfaces\IWhereCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCollectionCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCompiler.cs" />
+    <Compile Include="Model\Aggregate.cs" />
+    <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\Order\OrderByColumn.cs" />
+    <Compile Include="Model\OrderDir.cs" />
+    <Compile Include="Interfaces\IColumnSelector.cs" />
+    <Compile Include="Model\QueryParameter.cs" />
+    <Compile Include="Model\Select\AllColumnSelector.cs" />
+    <Compile Include="Model\Select\CountColumnSelector.cs" />
+    <Compile Include="Model\Select\GroupByColumnSelector.cs" />
+    <Compile Include="Model\Select\RowNumberColumnSelector.cs" />
+    <Compile Include="Model\Select\SqlColumnSelector.cs" />
+    <Compile Include="Model\Select\TotalColumnSelector.cs" />
+    <Compile Include="Model\Where\ColumnColumnWhereFilter.cs" />
+    <Compile Include="Model\Where\ColumnValueWhereFilter.cs" />
+    <Compile Include="Model\CommonTableExpression.cs" />
+    <Compile Include="Model\From\JoinColumn.cs" />
+    <Compile Include="Model\JoinType.cs" />
+    <Compile Include="Model\Field.cs" />
+    <Compile Include="Model\Query.cs" />
+    <Compile Include="Model\LiteralValue.cs" />
+    <Compile Include="Model\Select\ColumnSelector.cs" />
+    <Compile Include="Model\SelectQuery.cs" />
+    <Compile Include="Model\Table.cs" />
+    <Compile Include="Model\From\TableJoin.cs" />
+    <Compile Include="Interfaces\IWhereFilter.cs" />
+    <Compile Include="Model\Where\SqlWhereFilter.cs" />
+    <Compile Include="Model\Where\WhereFilterCollection.cs" />
+    <Compile Include="Model\Compare.cs" />
+    <Compile Include="Model\Combine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Compiler\SqlServer\QueryCompiler.cs" />
+    <Compile Include="Shorthand\QueryExtensions.cs" />
+    <Compile Include="Compiler\SqlServer\SelectQueryCompiler.cs" />
+    <Compile Include="Shorthand\FromExtensions.cs" />
+    <Compile Include="Shorthand\OffsetExtensions.cs" />
+    <Compile Include="Shorthand\SelectExtensions.cs" />
+    <Compile Include="Shorthand\OrderByExtensions.cs" />
+    <Compile Include="Shorthand\GroupByExtensions.cs" />
+    <Compile Include="Shorthand\WhereExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
