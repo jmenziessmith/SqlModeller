@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
+using SqlModeller.Compiler.SqlServer;
 using SqlModeller.Interfaces;
 using SqlModeller.Model;
 
@@ -16,27 +18,28 @@ namespace SqlModeller.Compiler.QueryParameterManagers
             _parameters = parameters;
         }
 
-        public string Parameterize(string value, DbType type, string alias = null)
+        public string Parameterize(string stringValue, DbType type, string alias = null)
         {
-            var match = FindMatch(value, type, alias);
+            var matchOn = ToStringHelper.ValueString(stringValue, type);
+            var match = FindMatch(matchOn, type, alias);
             if (match != null)
             {
                 return match.ParameterName;
             }
 
-            var newParameter = NewParameter(value, type, alias);
+            var newParameter = NewParameter(stringValue, type, alias);
 
             return newParameter.ParameterName;
         }
 
-        private QueryParameter FindMatch(string value, DbType type, string alias)
+        private QueryParameter FindMatch(string stringValue, DbType type, string alias)
         {
-            return _parameters.FirstOrDefault(x => x.Alias == alias 
-                                                && x.Value == value 
+            return _parameters.FirstOrDefault(x => x.Alias == alias
+                                                && x.StringValue == stringValue 
                                                 && x.DataType == type);
         }
 
-        private QueryParameter NewParameter(string value, DbType type, string alias)
+        private QueryParameter NewParameter(string stringValue, DbType type, string alias)
         {
             if (alias != null)
             {
@@ -53,7 +56,8 @@ namespace SqlModeller.Compiler.QueryParameterManagers
                              ID = GetNewID(),
                              Alias = alias,
                              DataType = type,
-                             Value = value
+                             StringValue = ToStringHelper.ValueString(stringValue, type),
+                             Value = Parse(stringValue, type)
                          };
              
 
@@ -68,6 +72,18 @@ namespace SqlModeller.Compiler.QueryParameterManagers
             return result;
         }
 
+        private object Parse(string stringValue, DbType type)
+        {
+            switch (type)
+            {
+                case DbType.DateTime:
+                case DbType.DateTime2:
+                    return DateTime.Parse(stringValue);
+            }
+            return stringValue;
+        }
+       
+
         private int GetNewID()
         {
             if (_parameters.Any())
@@ -76,5 +92,8 @@ namespace SqlModeller.Compiler.QueryParameterManagers
             }
             return 0;
         }
+
+
+
     }
 }

@@ -27,7 +27,7 @@ namespace SqlModeller.Model
         public WhereFilterCollection WhereFilters { get; set; }
         public HavingFilterCollection HavingFilters { get; set; }
 
-        public int? RowOffset { get; set; }
+        public int RowOffset { get; set; }
         public int? RowLimit { get; set; }
     }
 }

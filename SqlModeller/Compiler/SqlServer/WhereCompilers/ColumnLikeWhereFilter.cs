@@ -42,14 +42,13 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
             var leftWildCard = (where.LikeMode == LikeMode.WildcardLeft || where.LikeMode == LikeMode.Wildcard);
             var rightWildCard = (where.LikeMode == LikeMode.WildcardRight || where.LikeMode == LikeMode.Wildcard);
 
-            var textValue = ToStringHelper.ValueString(where.Text, DbType.String);
+            //var textValue = ToStringHelper.ValueString(, DbType.String);
 
-            var parameterisedText = parameters.Parameterize(textValue, DbType.String, where.LeftColumn.Field.Name);
+            var parameterisedText = parameters.Parameterize(where.Text, DbType.String, where.LeftColumn.Field.Name);
 
 
-            return string.Format("{0}.{1} {2} {3}{4}{5}",
-                                where.LeftColumn.TableAlias,
-                                where.LeftColumn.Field.Name,
+            return string.Format("{0} {1} {2}{3}{4}",
+                                where.LeftColumn.FullName,
                                 exclude ? "NOT LIKE" : "LIKE",
                                 leftWildCard ? wc + " + " : null,
                                 parameterisedText,

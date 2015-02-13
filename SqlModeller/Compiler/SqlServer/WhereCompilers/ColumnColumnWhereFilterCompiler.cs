@@ -11,9 +11,8 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
         {
             var where = filter as ColumnColumnWhereFilter;
 
-            return string.Format("{0}.{1} {2} {3}.{4}",
-                where.LeftColumn.TableAlias, 
-                where.LeftColumn.Field.Name,
+            return string.Format("{0} {1} {2}.{3}",
+                where.LeftColumn.FullName,
                 where.Operator.ToSqlString(),
                 where.RightColumn.TableAlias,
                 where.RightColumn.Field.Name

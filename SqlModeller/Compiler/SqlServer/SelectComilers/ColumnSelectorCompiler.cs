@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using SqlModeller.Helpers;
 using SqlModeller.Interfaces;
 using SqlModeller.Model;
 using SqlModeller.Model.Select;
@@ -14,27 +14,28 @@ namespace SqlModeller.Compiler.SqlServer.SelectComilers
 
             if (select.Aggregate != Aggregate.None)
             {
-                var isInGroupBy = query.GroupByColumns.Any(x => 
-                                       x.Field.Name == select.Field.Name
-                                    && x.TableAlias == select.TableAlias
-                                );
+                var isInGroupBy = AggregateHelpers.IsInGroupBy(query, select);
 
                 // if its in the group by, dont aggregate it
                 if (!isInGroupBy)
                 {
-                    return string.Format("{0}({1}.{2}) AS {3}",
+                    return string.Format("{0}({1}{2}{3}{4}) AS {5}",
                         select.Aggregate.ToSqlString(),
+                        select.Aggregate == Aggregate.Bit ? "0+" : null, // fix bit field aggregation for nulls
                         select.TableAlias,
+                        string.IsNullOrWhiteSpace(select.TableAlias) ? null : ".",
                         select.Field.Name,
                         select.Alias);
                 }
             }
 
-            return string.Format("{0}.{1} AS {2}", 
+            return string.Format("{0}{1}{2} AS {3}", 
                 select.TableAlias, 
+                string.IsNullOrWhiteSpace(select.TableAlias) ? null : ".",
                 select.Field.Name, 
                 select.Alias);
         }
+
     }
 }
 

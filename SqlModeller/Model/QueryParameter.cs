@@ -7,7 +7,8 @@ namespace SqlModeller.Model
         public int ID { get; set; }
         public string ParameterName { get; set; }
         public DbType DataType { get; set; }
-        public string Value { get; set; }
+        public string StringValue { get; set; }
+        public object Value { get; set; }
         public string Alias { get; set; }
     }
 }

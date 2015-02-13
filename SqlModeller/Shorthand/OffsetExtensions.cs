@@ -4,7 +4,7 @@ namespace SqlModeller.Shorthand
 {
     public static partial class Shorthand
     {
-        public static SelectQuery Offset(this SelectQuery query, int? offset)
+        public static SelectQuery Offset(this SelectQuery query, int offset)
         {
             query.RowOffset = offset;
             return query;

@@ -11,7 +11,10 @@ namespace SqlModeller.Compiler.SqlServer.SelectComilers
         {
             var select = value as RowNumberColumnSelector;
             string orderBy = new SelectQueryCompiler().CompileOrderBy(query);
-            orderBy = orderBy.Replace("\n\t", " ").Replace("\n", " ").Replace("  ", " ");
+            if (!string.IsNullOrWhiteSpace(orderBy))
+            {
+                orderBy = orderBy.Replace("\n\t", " ").Replace("\n", " ").Replace("  ", " ");
+            }
 
             if (select.Alias == null)
             {

@@ -14,13 +14,14 @@ namespace SqlModeller.Compiler.SqlServer
             var sql = string.Format("DECLARE {0} {1}; SET {0} = {2}",
                 parameter.ParameterName,
                 typeString,
-                parameter.Value);
+                parameter.StringValue);
 
             var result = new CompiledQueryParameter()
                          {
                              Sql = sql,
 
-                             Value = parameter.Value,
+                             StringValue = parameter.StringValue,
+                             Value =  parameter.Value,
                              Alias =  parameter.Alias,
                              DataType = parameter.DataType,
                              ID = parameter.ID,

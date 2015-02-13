@@ -54,6 +54,8 @@
     <Compile Include="Compiler\SqlServer\ToStringHelper.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnLikeWhereFilter.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
+    <Compile Include="Helpers\AggregateHelpers.cs" />
+    <Compile Include="Helpers\DbTypeMap.cs" />
     <Compile Include="Interfaces\IHavingCompiler.cs" />
     <Compile Include="Interfaces\IHavingFilter.cs" />
     <Compile Include="Interfaces\IQueryParameterManager.cs" />

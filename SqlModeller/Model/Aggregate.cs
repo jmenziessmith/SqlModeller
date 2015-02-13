@@ -9,6 +9,7 @@
         Sum,
         Avg,
         Count,
+        Bit,
     }
 
     public static class AggregateExtensions
@@ -18,6 +19,10 @@
             if (value == Aggregate.None)
             {
                 return null;
+            }
+            if (value == Aggregate.Bit)
+            {
+                return Aggregate.Min.ToString().ToUpper();
             }
 
             return value.ToString().ToUpper();

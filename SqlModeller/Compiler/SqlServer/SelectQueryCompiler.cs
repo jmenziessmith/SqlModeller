@@ -3,8 +3,10 @@ using SqlModeller.Compiler.Model;
 using SqlModeller.Compiler.SqlServer.HavingCompilers;
 using SqlModeller.Compiler.SqlServer.SelectComilers;
 using SqlModeller.Compiler.SqlServer.WhereCompilers;
+using SqlModeller.Helpers;
 using SqlModeller.Interfaces;
 using SqlModeller.Model;
+using SqlModeller.Model.Select;
 
 namespace SqlModeller.Compiler.SqlServer
 {
@@ -30,7 +32,7 @@ namespace SqlModeller.Compiler.SqlServer
         {
             var result = string.Empty;
 
-            if (selectQuery.RowOffset > 0)
+            if (selectQuery.RowOffset > 0 || selectQuery.RowLimit > 0)
             {
                 result += string.Format("OFFSET {0} ROWS ", selectQuery.RowOffset);
             }
@@ -88,7 +90,7 @@ namespace SqlModeller.Compiler.SqlServer
 
         public virtual string CompileWhere(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
-            if (!selectQuery.WhereFilters.Any())
+            if (selectQuery.WhereFilters == null || !selectQuery.WhereFilters.Any())
             {
                 return null;
             }
@@ -122,14 +124,34 @@ namespace SqlModeller.Compiler.SqlServer
             }
 
             string result = "ORDER BY ";
-
+            
             foreach (var orderBy in selectQuery.OrderByColumns)
             {
-                result += string.Format("\n\t {0}.{1} {2} ,", 
-                    orderBy.TableAlias,
-                    orderBy.Field.Name,
+                var fieldSelector = orderBy.FullName;
+
+                bool isInGroupBy = false;
+                // need to deal with aggregates
+                if (orderBy.Aggregate != Aggregate.None)
+                {
+                    isInGroupBy = AggregateHelpers.IsInGroupBy(selectQuery, orderBy);
+                }
+                if (!isInGroupBy)
+                {
+                    fieldSelector = string.Format("{0}({1}{2}{3}{4})",
+                        orderBy.Aggregate.ToSqlString(),
+                        orderBy.Aggregate == Aggregate.Bit ? "0+" : null, // fix bit field aggregation for nulls
+                        orderBy.TableAlias,
+                        string.IsNullOrWhiteSpace(orderBy.TableAlias) ? null : ".",
+                        orderBy.Field.Name
+                        );
+                }
+                
+                
+                result += string.Format("\n\t {0} {1} ,",
+                    fieldSelector,
                     orderBy.Direction.ToSqlString()
                     );
+                 
             }
 
             result = result.TrimEnd(',');
@@ -159,7 +181,7 @@ namespace SqlModeller.Compiler.SqlServer
 
         public virtual string CompileHaving(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
-            if (!selectQuery.HavingFilters.Any())
+            if (selectQuery.HavingFilters == null || !selectQuery.HavingFilters.Any())
             {
                 return null;
             }
