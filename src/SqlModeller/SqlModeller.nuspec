@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/jmenziessmith/SqlModeller/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jmenziessmith/SqlModeller/</projectUrl> 
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>SQL Query Model Modeller Compile Compiler</tags>
+  </metadata>
+</package>
