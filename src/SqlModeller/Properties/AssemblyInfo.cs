@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SqlModdler")]
+[assembly: AssemblyTitle("SqlModeller")]
 [assembly: AssemblyDescription("SQL Query Modeller and Compiler with Fluent Interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jon Menzies-Smith")]
-[assembly: AssemblyProduct("SqlModdler")]
+[assembly: AssemblyProduct("SqlModeller")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
