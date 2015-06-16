@@ -13,7 +13,7 @@ namespace SqlModeller.Model
         {
             SelectColumns = new List<IColumnSelector>();
             TableJoins = new List<TableJoin>();
-            GroupByColumns = new List<Column>();
+            GroupByColumns = new List<IGroupByColumn>();
             WhereFilters = new WhereFilterCollection();
             HavingFilters = new HavingFilterCollection();
             OrderByColumns = new List<OrderByColumn>();
@@ -22,7 +22,7 @@ namespace SqlModeller.Model
         public List<IColumnSelector> SelectColumns { get; set; }
         public Table FromTable { get; set; }
         public List<TableJoin> TableJoins { get; set; }
-        public List<Column> GroupByColumns { get; set; }
+        public List<IGroupByColumn> GroupByColumns { get; set; }
         public List<OrderByColumn> OrderByColumns { get; set; }
         public WhereFilterCollection WhereFilters { get; set; }
         public HavingFilterCollection HavingFilters { get; set; }

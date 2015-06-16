@@ -43,7 +43,7 @@ namespace SqlModeller.Compiler.QueryParameterManagers
         {
             if (alias != null)
             {
-                const string aliasPattern = "[a-zA-Z0-9]*";
+                const string aliasPattern = "^[a-zA-Z0-9_]*$";
                 var regex = new Regex(aliasPattern);
                 if (!regex.IsMatch(alias))
                 {

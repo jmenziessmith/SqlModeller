@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SqlModeller.Compiler.Model;
 using SqlModeller.Compiler.QueryParameterManagers;
 using SqlModeller.Interfaces;
@@ -12,7 +13,7 @@ namespace SqlModeller.Compiler.SqlServer
         {
             var result = new CompiledQuery();
 
-            var parameters = new List<QueryParameter>();
+            var parameters = query.Parameters.ToList();
 
             IQueryParameterManager parameterManager = useParameters 
                 ? (IQueryParameterManager) new QueryParameterManager(parameters) 

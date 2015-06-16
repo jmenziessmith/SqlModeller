@@ -6,6 +6,7 @@ namespace SqlModeller.Model
     {
         Join,
         LeftJoin,
+        RightJoin,
         InnerJoin
     }
 
@@ -19,6 +20,8 @@ namespace SqlModeller.Model
                     return "JOIN";
                 case JoinType.LeftJoin:
                     return "LEFT JOIN";
+                case JoinType.RightJoin:
+                    return "RIGHT JOIN";
                 case JoinType.InnerJoin:
                     return "INNER JOIN";
             }

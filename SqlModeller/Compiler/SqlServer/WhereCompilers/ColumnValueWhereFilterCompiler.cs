@@ -9,9 +9,8 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
         public string Compile(IWhereFilter filter, SelectQuery query, IQueryParameterManager parameters)
         {
             var where = filter as ColumnValueWhereFilter;
-
-            //var valueString = ToStringHelper.ValueString(where.RightValue.Value, where.RightValue.Type);
-            var valueString = parameters.Parameterize(where.RightValue.Value, where.RightValue.Type, where.LeftColumn.Field.Name);
+             
+            var valueString = parameters.Parameterize(where.RightValue.Value, where.RightValue.Type, where.ParameterAlias ?? where.LeftColumn.Field.Name);
 
             return string.Format("{0} {1} {2}",
                 where.LeftColumn.FullName,

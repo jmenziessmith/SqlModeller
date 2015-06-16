@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SqlModeller.Model;
 
@@ -38,7 +39,7 @@ namespace SqlModeller.Compiler.Model
 
             foreach (var cte in CommonTableExpressions)
             {
-                result += string.Format("\n\n{0} AS (\n\n{1}\n\n) /* {0} */ ,", cte.Alias, cte.SelectQuery.Sql);
+                result += string.Format("\n\n{0} AS (\n{1}\n) /* {0} */ ,", cte.Alias, cte.SelectQuery.Sql);
             }
 
             result = result.TrimEnd(',');
@@ -61,5 +62,9 @@ namespace SqlModeller.Compiler.Model
             return result;
         }
 
+        public override string ToString()
+        {
+            return string.Concat(GetParameterSql(), Environment.NewLine, GetSql());
+        }
     }
 }

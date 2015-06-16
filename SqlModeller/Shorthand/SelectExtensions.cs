@@ -34,16 +34,16 @@ namespace SqlModeller.Shorthand
             return query;
         }
 
-        public static SelectQuery SelectRowNumber(this SelectQuery query, string alias)
+        public static SelectQuery SelectRowNumber(this SelectQuery query, string alias, string qualifiedFieldName = null)
         {
             query.SelectColumns.Add(new RowNumberColumnSelector(alias));
             return query;
         }
 
 
-        public static SelectQuery SelectCount(this SelectQuery query, string alias)
+        public static SelectQuery SelectCount(this SelectQuery query, string alias, string qualifiedFieldName = "1")
         {
-            query.SelectColumns.Add(new CountColumnSelector(alias));
+            query.SelectColumns.Add(new CountColumnSelector(alias, qualifiedFieldName));
             return query;
         }
 
@@ -55,9 +55,9 @@ namespace SqlModeller.Shorthand
         }
 
 
-        public static SelectQuery SelectGroupKey(this SelectQuery query, string alias)
+        public static SelectQuery SelectGroupKey(this SelectQuery query, string alias, int index = 0)
         {
-            query.SelectColumns.Add(new GroupByColumnSelector(alias));
+            query.SelectColumns.Add(new GroupByColumnSelector(alias, index));
             return query;
         }
 

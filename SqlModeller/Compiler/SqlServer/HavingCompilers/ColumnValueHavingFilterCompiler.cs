@@ -11,8 +11,7 @@ namespace SqlModeller.Compiler.SqlServer.HavingCompilers
         {
             var having = filter as ColumnValueHavingFilter;
 
-            //var valueString = ToStringHelper.ValueString(having.RightValue.Value, having.RightValue.Type);
-            var valueString = parameters.Parameterize(having.RightValue.Value, having.RightValue.Type, having.LeftColumn.Field.Name);
+            var valueString = parameters.Parameterize(having.RightValue.Value, having.RightValue.Type, having.ParameterAlias ?? having.LeftColumn.Field.Name);
 
             return string.Format("{0}({1}{2}) {3} {4}",
                 having.Aggregate.ToSqlString(),

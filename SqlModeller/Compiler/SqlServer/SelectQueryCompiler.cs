@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using SqlModeller.Compiler.Model;
+using SqlModeller.Compiler.SqlServer.GroupByCompilers;
 using SqlModeller.Compiler.SqlServer.HavingCompilers;
-using SqlModeller.Compiler.SqlServer.SelectComilers;
+using SqlModeller.Compiler.SqlServer.SelectCompilers;
 using SqlModeller.Compiler.SqlServer.WhereCompilers;
 using SqlModeller.Helpers;
 using SqlModeller.Interfaces;
@@ -19,7 +20,7 @@ namespace SqlModeller.Compiler.SqlServer
             result.Select = CompileSelect(selectQuery, parameters);
             result.From = CompileFrom(selectQuery);
             result.Where = CompileWhere(selectQuery, parameters);
-            result.GroupBy = CompileGroupBy(selectQuery);
+            result.GroupBy = CompileGroupBy(selectQuery, parameters);
             result.OrderBy = CompileOrderBy(selectQuery);
             result.Having = CompileHaving(selectQuery, parameters);
 
@@ -53,7 +54,7 @@ namespace SqlModeller.Compiler.SqlServer
         {
             var result = "SELECT ";
 
-            var selectCompiler = new SelectColumnsCompiler();
+            var selectCompiler = new SelectColumnCollectionCompiler();
 
             foreach (var column in selectQuery.SelectColumns)
             {
@@ -135,7 +136,7 @@ namespace SqlModeller.Compiler.SqlServer
                 {
                     isInGroupBy = AggregateHelpers.IsInGroupBy(selectQuery, orderBy);
                 }
-                if (!isInGroupBy)
+                if (!isInGroupBy && selectQuery.GroupByColumns.Count > 0)
                 {
                     fieldSelector = string.Format("{0}({1}{2}{3}{4})",
                         orderBy.Aggregate.ToSqlString(),
@@ -160,7 +161,7 @@ namespace SqlModeller.Compiler.SqlServer
 
         }
 
-        public virtual string CompileGroupBy(SelectQuery selectQuery)
+        public virtual string CompileGroupBy(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
             if (!selectQuery.GroupByColumns.Any())
             {
@@ -169,14 +170,17 @@ namespace SqlModeller.Compiler.SqlServer
 
             var result = "GROUP BY ";
 
-            foreach (var groupBy in selectQuery.GroupByColumns)
-            {
-                result += string.Format("\n\t {0}.{1} ,", groupBy.TableAlias, groupBy.Field.Name);
-            }
+            var groupCompiler = new GroupByColumCollectionCompiler();
 
+            foreach (var column in selectQuery.GroupByColumns)
+            {
+                result += string.Format("\n\t {0} ,",
+                                groupCompiler.Compile(column, selectQuery, parameters));
+            }
             result = result.TrimEnd(',');
 
-            return result;
+            return result; 
+ 
         }
 
         public virtual string CompileHaving(SelectQuery selectQuery, IQueryParameterManager parameters)

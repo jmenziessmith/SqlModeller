@@ -13,6 +13,7 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
                 new SqlWhereFilterCompiler(),
                 new ColumnColumnWhereFilterCompiler(),
                 new ColumnValueWhereFilterCompiler(),
+                new ColumnInWhereFilterCompiler(),
                 new WhereFilterCollectionCompiler(),
                 new ColumnLikeWhereFilterCompiler(),
             };
