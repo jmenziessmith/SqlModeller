@@ -1,2 +1,7 @@
 # SqlModeller
-Sql Statement Builder
+Sql Query Builder
+
+### NuGet
+```
+PM> Install-Package SqlModeller
+```
