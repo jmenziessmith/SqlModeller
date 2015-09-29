@@ -35,6 +35,7 @@ namespace SqlModeller.Compiler.SqlServer
         {
             switch (dataType)
             {
+
                 case DbType.String:
                 case DbType.StringFixedLength:
                 case DbType.AnsiString:
@@ -56,6 +57,12 @@ namespace SqlModeller.Compiler.SqlServer
                     return "DATETIME";
                 case DbType.DateTime2:
                     return "DATETIME2";
+
+                case DbType.Boolean:
+                    return "BIT";
+                     
+                default:
+                    return dataType.ToString().ToUpper();
             }
             throw new NotImplementedException();
         }

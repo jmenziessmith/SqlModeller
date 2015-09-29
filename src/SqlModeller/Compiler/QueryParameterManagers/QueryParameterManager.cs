@@ -79,6 +79,8 @@ namespace SqlModeller.Compiler.QueryParameterManagers
                 case DbType.DateTime:
                 case DbType.DateTime2:
                     return DateTime.Parse(stringValue);
+                case DbType.Boolean:
+                    return stringValue == "1" || stringValue.ToLower() == "true";
             }
             return stringValue;
         }
