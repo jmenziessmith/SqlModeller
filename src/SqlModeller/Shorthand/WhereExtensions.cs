@@ -106,121 +106,122 @@ namespace SqlModeller.Shorthand
 
         // WHERE COLUMN VALUE
 
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
             var whereFilter = new ColumnValueWhereFilter()
                               {
                                   LeftColumn = new Column(leftTableAlias, leftField),
                                   Operator = comparison,
                                   RightValue = new LiteralValue(rightValue, rightType),
-                                  ParameterAlias = parameterAlias
+                                  ParameterAlias = parameterAlias,
+                                  IsNullValue = isNullValue
                               };
             query.Add(whereFilter);
             return query;
         }
 
         // int
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int32, parameterAlias);
+            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int32, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
 
         // long
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int64, parameterAlias);
+            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int64, parameterAlias, NullableToString(isNullValue));
             return query;
         }
          
 
         // double
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Double, parameterAlias);
+            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Double, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
         // decimal
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Decimal, parameterAlias);
+            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Decimal, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
@@ -248,24 +249,24 @@ namespace SqlModeller.Shorthand
 
 
         // DateTime
-        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, Table leftTable, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null, DateTime? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null)
+        public static SelectQuery WhereColumnValue(this SelectQuery query, string leftTableAlias, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null, DateTime? isNullValue = null)
         {
-            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereFilters.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, Table leftTable, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null, DateTime? isNullValue = null)
         {
-            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.WhereColumnValue(leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null)
+        public static WhereFilterCollection WhereColumnValue(this WhereFilterCollection query, string leftTableAlias, string leftField, Compare comparison, DateTime rightValue, string parameterAlias = null, DateTime? isNullValue = null)
         {
-            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString("yyyy-MM-dd HH:mm:ss"), DbType.DateTime2, parameterAlias);
+            query.WhereColumnValue(leftTableAlias, leftField, comparison, rightValue.ToString("yyyy-MM-dd HH:mm:ss"), DbType.DateTime2, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
@@ -292,6 +293,19 @@ namespace SqlModeller.Shorthand
             return query;
         }
 
+
+        private static string NullableToString(object value)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+            if (value is DateTime)
+            {
+                return ((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            return value.ToString();
+        }
 
     }
 }

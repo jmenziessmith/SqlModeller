@@ -8,6 +8,7 @@ namespace SqlModeller.Model.Having
         public Column LeftColumn { get; set; }
         public LiteralValue RightValue { get; set; }
         public Compare Operator { get; set; }
+        public string IsNullValue { get; set; }
         
         /// <summary>
         /// Optional value, used for naming parameters. If not set, the field name will be used

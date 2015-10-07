@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using NUnit.Framework;
 using SqlModeller.Model;
 using SqlModeller.Model.Having;
@@ -42,6 +43,8 @@ namespace SqlModellerTests
                     .WhereColumnColumn(teamTable, "ID", Compare.NotEqual, countryTable, "ID")
                     .WhereColumnValue(playerTable, "FirstName", Compare.NotEqual, "Peter")
                     .WhereColumnValue(playerTable, "StartDate", Compare.NotEqual, DateTime.Now)
+                    .WhereColumnValue(playerTable, "Score", Compare.LessThanOrEqual, 10, isNullValue : 0)
+                    .WhereColumnValue(playerTable, "Score", Compare.GreaterThan, "1", DbType.Int32, isNullValue : "0")
                     .WhereCollection(Combine.Or, new WhereFilterCollection()
                         .WhereColumnColumn(teamTable, "Value1", Compare.GreaterThan, countryTable, "Value2")
                         .WhereColumnValue(teamTable, "Value3", Compare.LessThan, 1)
@@ -56,6 +59,7 @@ namespace SqlModellerTests
                         .HavingColumnValue(Aggregate.Min, playerTable, "RedCards", Compare.GreaterThan, 1)
                         .HavingColumnValue(Aggregate.Max, playerTable, "RedCards", Compare.LessThan, 5)
                     )
+                    .HavingColumnValue(Aggregate.Sum, playerTable, "Score", Compare.LessThan, 100, isNullValue : 0)
             // ORDER BY
                 .OrderBy(countryTable, "ID", OrderDir.Asc)
                        .OrderByDesc(playerTable, "ID");

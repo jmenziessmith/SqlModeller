@@ -60,6 +60,7 @@
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnInWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
     <Compile Include="Helpers\AggregateHelpers.cs" />
+    <Compile Include="Helpers\DbTypeExtensions.cs" />
     <Compile Include="Helpers\DbTypeMap.cs" />
     <Compile Include="Interfaces\IGroupByColumn.cs" />
     <Compile Include="Interfaces\IGroupByColumnCompiler.cs" />

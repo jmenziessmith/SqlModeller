@@ -48,22 +48,22 @@ namespace SqlModeller.Shorthand
 
         // Having COLUMN VALUE
  
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, rightType, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, string rightValue, DbType rightType, string parameterAlias = null, string isNullValue = null)
         {
             var HavingFilter = new ColumnValueHavingFilter()
                               {
@@ -71,99 +71,100 @@ namespace SqlModeller.Shorthand
                                   LeftColumn = new Column(leftTableAlias, leftField),
                                   Operator = comparison,
                                   RightValue = new LiteralValue(rightValue, rightType),
-                                  ParameterAlias = parameterAlias
+                                  ParameterAlias = parameterAlias,
+                                  IsNullValue =  isNullValue
                               };
             query.Add(HavingFilter);
             return query;
         }
 
         // int
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, int rightValue, string parameterAlias = null, int? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int32, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int32, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
 
         // long
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, long rightValue, string parameterAlias = null, long? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int64, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Int64, parameterAlias, NullableToString(isNullValue));
             return query;
         }
          
 
         // double
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, double rightValue, string parameterAlias = null, double? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Double, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Double, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
         // decimal
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static SelectQuery HavingColumnValue(this SelectQuery query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingFilters.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, Table leftTable, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTable.Alias, leftField, comparison, rightValue, parameterAlias, isNullValue);
             return query;
         }
-        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null)
+        public static HavingFilterCollection HavingColumnValue(this HavingFilterCollection query, Aggregate aggregate, string leftTableAlias, string leftField, Compare comparison, decimal rightValue, string parameterAlias = null, decimal? isNullValue = null)
         {
-            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Decimal, parameterAlias);
+            query.HavingColumnValue(aggregate, leftTableAlias, leftField, comparison, rightValue.ToString(), DbType.Decimal, parameterAlias, NullableToString(isNullValue));
             return query;
         }
 
