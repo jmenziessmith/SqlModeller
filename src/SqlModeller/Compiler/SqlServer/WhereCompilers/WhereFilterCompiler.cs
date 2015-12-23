@@ -16,6 +16,7 @@ namespace SqlModeller.Compiler.SqlServer.WhereCompilers
                 new ColumnInWhereFilterCompiler(),
                 new WhereFilterCollectionCompiler(),
                 new ColumnLikeWhereFilterCompiler(),
+                new ColumnContainsWhereFilterCompiler(),
             };
         } 
     }

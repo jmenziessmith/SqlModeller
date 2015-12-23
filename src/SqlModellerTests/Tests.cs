@@ -40,6 +40,8 @@ namespace SqlModellerTests
                     .Where("p.Name IS NOT NULL")
                     .WhereColumnLike(teamTable, "Name", "F.C.", LikeMode.WildcardLeft)
                     .WhereColumnLike(teamTable, "Description", "\"premier league\" -winners", LikeMode.FreeText)
+                    .WhereColumnContains(teamTable, "Name", "Man -Cit", ContainsMode.FreeText)
+                    .WhereColumnContains(teamTable, "Description", "Winner Runner-up", ContainsMode.AnyWordWildcardRight)
                     .WhereColumnColumn(teamTable, "ID", Compare.NotEqual, countryTable, "ID")
                     .WhereColumnValue(playerTable, "FirstName", Compare.NotEqual, "Peter")
                     .WhereColumnValue(playerTable, "StartDate", Compare.NotEqual, DateTime.Now)

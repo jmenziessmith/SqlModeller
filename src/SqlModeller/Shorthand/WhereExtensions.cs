@@ -103,6 +103,35 @@ namespace SqlModeller.Shorthand
                       });
             return query;
         }
+         
+        // WHERE CONTAINS
+        public static SelectQuery WhereColumnContains(this SelectQuery query, Table leftTable, string leftField, string text, ContainsMode mode = ContainsMode.Default)
+        {
+            query.WhereFilters.WhereColumnContains(leftTable, leftField, text, mode);
+            return query;
+        }
+        public static SelectQuery WhereColumnContains(this SelectQuery query, string leftTableAlias, string leftField, string text, ContainsMode mode = ContainsMode.Default)
+        {
+            query.WhereFilters.WhereColumnContains(leftTableAlias, leftField, text, mode);
+            return query;
+        }
+
+        public static WhereFilterCollection WhereColumnContains(this WhereFilterCollection query, Table leftTable, string leftField, string text, ContainsMode mode = ContainsMode.Default)
+        {
+            query.WhereColumnContains(leftTable.Alias, leftField, text, mode);
+            return query;
+        }
+        public static WhereFilterCollection WhereColumnContains(this WhereFilterCollection query, string leftTableAlias, string leftField, string text, ContainsMode mode = ContainsMode.Default)
+        {
+            query.Add(new ColumnContainsWhereFilter()
+            {
+                LeftColumn = new Column(leftTableAlias, leftField),
+                ContainsMode = mode,
+                Text = text
+            });
+            return query;
+        }
+
 
         // WHERE COLUMN VALUE
 

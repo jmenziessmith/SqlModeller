@@ -6,8 +6,7 @@ using SqlModeller.Compiler.SqlServer.SelectCompilers;
 using SqlModeller.Compiler.SqlServer.WhereCompilers;
 using SqlModeller.Helpers;
 using SqlModeller.Interfaces;
-using SqlModeller.Model;
-using SqlModeller.Model.Select;
+using SqlModeller.Model; 
 
 namespace SqlModeller.Compiler.SqlServer
 {

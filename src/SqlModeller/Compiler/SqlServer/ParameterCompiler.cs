@@ -40,7 +40,7 @@ namespace SqlModeller.Compiler.SqlServer
                 case DbType.StringFixedLength:
                 case DbType.AnsiString:
                 case DbType.AnsiStringFixedLength:
-                    return "NVARCHAR(max)";
+                    return "NVARCHAR(4000)"; // 4000 is max length allowed for fulltext search params
 
                 case DbType.Int16:
                     return "SMALLINT";

@@ -56,6 +56,7 @@
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\ToStringHelper.cs" />
+    <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnContainsWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnLikeWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnInWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\SqlWhereFilterCompiler.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCompiler.cs" />
     <Compile Include="Model\Aggregate.cs" />
     <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\ContainsMode.cs" />
     <Compile Include="Model\DatePart.cs" />
     <Compile Include="Model\GroupBy\GroupByColumn.cs" />
     <Compile Include="Model\GroupBy\GroupByColumnDatePart.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Model\Having\HavingFilterCollection.cs" />
     <Compile Include="Model\Where\ColumnColumnWhereFilter.cs" />
     <Compile Include="Model\Where\ColumnInWhereFilter.cs" />
+    <Compile Include="Model\Where\ColumnContainsWhereFilter.cs" />
     <Compile Include="Model\Where\ColumnValueWhereFilter.cs" />
     <Compile Include="Model\CommonTableExpression.cs" />
     <Compile Include="Model\From\JoinColumn.cs" />
