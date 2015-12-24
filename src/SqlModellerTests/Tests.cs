@@ -23,6 +23,7 @@ namespace SqlModellerTests
 
             // SELECT
                 .SelectRowNumber("_ROW")
+                    .SelectOrderByColumn("_SORT")
                     .SelectCount("_COUNT")
                     .SelectGroupKey("_GROUP_KEY")
                     .Select("1 as ONE")
@@ -80,7 +81,7 @@ namespace SqlModellerTests
                 .SelectTotal("_TOTAL_ROWS", 0)
                 .SelectAll()
                 .From(cte.Alias, cte.Alias)
-                .OrderBy(cte.Alias, "_ROW")
+                //.OrderBy(cte.Alias, "_ROW")
                 .Offset(10)
                 .Fetch(5);
 

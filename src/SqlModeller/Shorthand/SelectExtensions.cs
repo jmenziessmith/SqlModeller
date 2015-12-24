@@ -40,6 +40,12 @@ namespace SqlModeller.Shorthand
             return query;
         }
 
+        public static SelectQuery SelectOrderByColumn(this SelectQuery query, string alias, string qualifiedFieldName = null)
+        {
+            query.SelectColumns.Add(new OrderByColumnSelector(alias));
+            return query;
+        }
+
 
         public static SelectQuery SelectCount(this SelectQuery query, string alias, string qualifiedFieldName = "1")
         {

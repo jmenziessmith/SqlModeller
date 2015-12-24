@@ -14,6 +14,7 @@ namespace SqlModeller.Compiler.SqlServer.SelectCompilers
                 new ColumnSelectorCompiler(),
                 new CountColumnSelectorCompiler(),
                 new RowNumberColumnSelectorCompiler(),
+                new OrderByColumnSelectorCompiler(),
                 new TotalColumnSelectorCompiler(),
                 new GroupByColumnSelectorCompiler(),
                 new SqlColumnSelectorCompiler(),

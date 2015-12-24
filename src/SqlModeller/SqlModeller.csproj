@@ -50,6 +50,7 @@
     <Compile Include="Compiler\SqlServer\GroupByCompilers\GroupByColumCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\ParameterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\SelectCompilers\ColumnDatePartSelectorCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\SelectCompilers\OrderByColumnSelectorCompiler.cs" />
     <Compile Include="Compiler\SqlServer\SelectCompilers\SqlColumnSelectorCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\ColumnValueHavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\SqlHavingFilterCompiler.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Model\Select\ColumnDatePartSelector.cs" />
     <Compile Include="Model\Select\CountColumnSelector.cs" />
     <Compile Include="Model\Select\GroupByColumnSelector.cs" />
+    <Compile Include="Model\Select\OrderByColumnSelector.cs" />
     <Compile Include="Model\Select\RowNumberColumnSelector.cs" />
     <Compile Include="Model\Select\SqlColumnSelector.cs" />
     <Compile Include="Model\Select\TotalColumnSelector.cs" />
