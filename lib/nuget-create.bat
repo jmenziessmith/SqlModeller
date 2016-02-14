@@ -1,2 +1,1 @@
-nuget pack ../src/SqlModeller/SqlModeller.csproj -Build -Symbols -Properties Configuration=Release -OutputDirectory nuget
- 
+nuget pack ../src/SqlModeller/SqlModeller.csproj -Build -Symbols -Properties "Configuration=Release;Platform=AnyCPU;OutputPath=nuget" -OutputDirectory nuget
