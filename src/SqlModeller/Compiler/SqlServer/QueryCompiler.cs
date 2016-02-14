@@ -28,7 +28,7 @@ namespace SqlModeller.Compiler.SqlServer
             }
 
             // Select Query
-            var selectQueryCompiler = new SelectQueryCompiler();
+            var selectQueryCompiler = GetSelectCompiler(query.SelectQuery);
             result.SelectQuery = selectQueryCompiler.Compile(query.SelectQuery, parameterManager);
 
             // Parameters
@@ -40,6 +40,17 @@ namespace SqlModeller.Compiler.SqlServer
             }
 
             return result;
+        }
+
+
+        public SelectQueryCompiler GetSelectCompiler(SelectQuery query)
+        {
+            if(query is UnionSelectQuery)
+            {
+                return new UnionSelectQueryCompiler();
+            }
+
+            return new SelectQueryCompiler(); 
         }
     }
 }

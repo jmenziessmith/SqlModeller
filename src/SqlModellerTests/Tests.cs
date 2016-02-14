@@ -91,6 +91,28 @@ namespace SqlModellerTests
             Console.WriteLine(compiled.Sql);
 
         }
-        
+
+
+        [Test]
+        public void TestUnion()
+        {
+
+            var firstTable = new Table("t1", "FirstTable");
+            var secondTable = new Table("t2", "SecondTable");
+            var thirdTable = new Table("t3", "ThirdTable");
+
+            var selectQuery = new SelectQuery().SelectAll().From(firstTable)
+            .UnionAll(new SelectQuery().SelectAll().From(secondTable))
+            .Union(new SelectQuery().SelectAll().From(thirdTable))
+            .OrderBy(string.Empty, "ProductName");
+
+            var query = new Query().Select(selectQuery);
+            
+            var compiled = query.Compile();
+             
+            Console.WriteLine(compiled.Sql);
+
+            // http://sqlfiddle.com/#!6/f9f24/9
+        }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\ToStringHelper.cs" />
+    <Compile Include="Compiler\SqlServer\UnionSelectQueryCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnContainsWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnLikeWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnInWhereFilterCompiler.cs" />
@@ -111,6 +112,8 @@
     <Compile Include="Model\Having\ColumnValueHavingFilter.cs" />
     <Compile Include="Model\Having\SqlWhereHavingFilter.cs" />
     <Compile Include="Model\Having\HavingFilterCollection.cs" />
+    <Compile Include="Model\UnionMode.cs" />
+    <Compile Include="Model\UnionSelectQuery.cs" />
     <Compile Include="Model\Where\ColumnColumnWhereFilter.cs" />
     <Compile Include="Model\Where\ColumnInWhereFilter.cs" />
     <Compile Include="Model\Where\ColumnContainsWhereFilter.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Shorthand\OrderByExtensions.cs" />
     <Compile Include="Shorthand\GroupByExtensions.cs" />
     <Compile Include="Shorthand\HavingExtensions.cs" />
+    <Compile Include="Shorthand\UnionExtensions.cs" />
     <Compile Include="Shorthand\WhereExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

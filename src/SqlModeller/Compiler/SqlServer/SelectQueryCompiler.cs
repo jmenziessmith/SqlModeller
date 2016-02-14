@@ -17,7 +17,7 @@ namespace SqlModeller.Compiler.SqlServer
             var result = new CompiledSelectQuery();
 
             result.Select = CompileSelect(selectQuery, parameters);
-            result.From = CompileFrom(selectQuery);
+            result.From = CompileFrom(selectQuery, parameters);
             result.Where = CompileWhere(selectQuery, parameters);
             result.GroupBy = CompileGroupBy(selectQuery, parameters);
             result.OrderBy = CompileOrderBy(selectQuery);
@@ -65,7 +65,7 @@ namespace SqlModeller.Compiler.SqlServer
             return result;
         }
 
-        public virtual string CompileFrom(SelectQuery selectQuery)
+        public virtual string CompileFrom(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
             var result = "FROM ";
             result +=  string.Format("\n\t{0} AS {1} ", 
