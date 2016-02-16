@@ -114,5 +114,32 @@ namespace SqlModellerTests
 
             // http://sqlfiddle.com/#!6/f9f24/9
         }
+
+        [Test]
+        public void TestUnionCte()
+        {
+
+            var firstTable = new Table("t1", "FirstTable");
+            var secondTable = new Table("t2", "SecondTable");
+            var thirdTable = new Table("t3", "ThirdTable");
+
+            var selectQuery = new SelectQuery().SelectAll().From(firstTable)
+            .UnionAll(new SelectQuery().SelectAll().From(secondTable))
+            .Union(new SelectQuery().SelectAll().From(thirdTable));
+
+            var cte = new CommonTableExpression { Alias = "Cte", Query = selectQuery };
+
+            var query = new Query();
+            query.CommonTableExpressions.Add(cte);
+            query.SelectQuery = new SelectQuery()
+                .From(cte.Alias, cte.Alias)
+                .Select("ProductName")
+                .OrderBy(string.Empty, "ProductName");
+
+
+            var compiled = query.Compile(false);
+
+            Console.WriteLine(compiled.Sql);
+        }
     }
 }

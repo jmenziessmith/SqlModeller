@@ -11,8 +11,8 @@ namespace SqlModeller.Compiler.SqlServer
         {
             var result = new CompiledCommonTableExpression();
             result.Alias = cte.Alias;
-
-            var selectQueryCompiler = new SelectQueryCompiler();
+            var queryCompiler = new QueryCompiler();
+            var selectQueryCompiler = queryCompiler.GetSelectCompiler(cte.Query);
             result.SelectQuery = selectQueryCompiler.Compile(cte.Query, parameters);
             result.SelectQuery.OrderBy = null; // order by is not allowd in CTE, but may have been used for over( ) statements
 
