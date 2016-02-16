@@ -9,8 +9,9 @@ namespace SqlModeller.Model
 {
     public class SelectQuery
     {
-        public SelectQuery()
+        public SelectQuery(bool selectDistinct = false)
         {
+            SelectDistinct = selectDistinct;
             SelectColumns = new List<IColumnSelector>();
             TableJoins = new List<TableJoin>();
             GroupByColumns = new List<IGroupByColumn>();
@@ -19,6 +20,7 @@ namespace SqlModeller.Model
             OrderByColumns = new List<OrderByColumn>();
         }
 
+        public bool SelectDistinct { get; set; }
         public List<IColumnSelector> SelectColumns { get; set; }
         public Table FromTable { get; set; }
         public List<TableJoin> TableJoins { get; set; }

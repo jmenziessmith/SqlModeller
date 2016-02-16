@@ -51,7 +51,7 @@ namespace SqlModeller.Compiler.SqlServer
 
         public virtual string CompileSelect(SelectQuery selectQuery, IQueryParameterManager parameters)
         {
-            var result = "SELECT ";
+            var result = "SELECT " + (selectQuery.SelectDistinct ? "DISTINCT " : null);
 
             var selectCompiler = new SelectColumnCollectionCompiler();
 

@@ -28,6 +28,13 @@ namespace SqlModeller.Shorthand
             return query;
         }
 
+        public static SelectQuery SelectDistinct(this SelectQuery query, bool distinct = true)
+        {
+            query.SelectDistinct = distinct;
+            return query;
+        }
+
+
         public static SelectQuery SelectAll(this SelectQuery query)
         {
             query.SelectColumns.Add(new AllColumnSelector());

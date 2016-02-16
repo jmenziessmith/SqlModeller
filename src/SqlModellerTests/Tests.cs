@@ -141,5 +141,31 @@ namespace SqlModellerTests
 
             Console.WriteLine(compiled.Sql);
         }
+
+        [Test]
+        public void TestSelectDistinct()
+        {
+            var firstTable = new Table("t1", "FirstTable");
+
+            var selectQuery = new SelectQuery()
+                .SelectDistinct()
+                .SelectAll()
+                .From(firstTable);
+
+            var cte = new CommonTableExpression { Alias = "Cte", Query = selectQuery };
+
+            var query = new Query();
+            query.CommonTableExpressions.Add(cte);
+            query.SelectQuery = new SelectQuery(selectDistinct: true) 
+                .From(cte.Alias, cte.Alias)
+                .Select("ProductName")
+                .OrderBy(string.Empty, "ProductName");
+
+
+            var compiled = query.Compile(false);
+
+            Console.WriteLine(compiled.Sql);
+
+        }
     }
 }
