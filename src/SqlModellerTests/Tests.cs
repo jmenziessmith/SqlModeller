@@ -5,6 +5,8 @@ using SqlModeller.Model;
 using SqlModeller.Model.Having;
 using SqlModeller.Model.Where;
 using SqlModeller.Shorthand;
+using System.Collections.Generic;
+using SqlModeller.Model.From;
 
 namespace SqlModellerTests
 {
@@ -46,8 +48,8 @@ namespace SqlModellerTests
                     .WhereColumnColumn(teamTable, "ID", Compare.NotEqual, countryTable, "ID")
                     .WhereColumnValue(playerTable, "FirstName", Compare.NotEqual, "Peter")
                     .WhereColumnValue(playerTable, "StartDate", Compare.NotEqual, DateTime.Now)
-                    .WhereColumnValue(playerTable, "Score", Compare.LessThanOrEqual, 10, isNullValue : 0)
-                    .WhereColumnValue(playerTable, "Score", Compare.GreaterThan, "1", DbType.Int32, isNullValue : "0")
+                    .WhereColumnValue(playerTable, "Score", Compare.LessThanOrEqual, 10, isNullValue: 0)
+                    .WhereColumnValue(playerTable, "Score", Compare.GreaterThan, "1", DbType.Int32, isNullValue: "0")
                     .WhereCollection(Combine.Or, new WhereFilterCollection()
                         .WhereColumnColumn(teamTable, "Value1", Compare.GreaterThan, countryTable, "Value2")
                         .WhereColumnValue(teamTable, "Value3", Compare.LessThan, 1)
@@ -58,20 +60,20 @@ namespace SqlModellerTests
                 .Having(Combine.And)
                     .Having("SUM(t.Points) > 4")
                     .HavingColumnValue(Aggregate.Sum, playerTable, "Goals", Compare.GreaterThan, 10)
-                    .HavingCollection(Combine.Or,new HavingFilterCollection()
+                    .HavingCollection(Combine.Or, new HavingFilterCollection()
                         .HavingColumnValue(Aggregate.Min, playerTable, "RedCards", Compare.GreaterThan, 1)
                         .HavingColumnValue(Aggregate.Max, playerTable, "RedCards", Compare.LessThan, 5)
                     )
-                    .HavingColumnValue(Aggregate.Sum, playerTable, "Score", Compare.LessThan, 100, isNullValue : 0)
+                    .HavingColumnValue(Aggregate.Sum, playerTable, "Score", Compare.LessThan, 100, isNullValue: 0)
             // ORDER BY
                 .OrderBy(countryTable, "ID", OrderDir.Asc)
                        .OrderByDesc(playerTable, "ID");
 
             var cte = new CommonTableExpression()
-                      {
-                          Alias = "cte1",
-                          Query = cteQuery
-                      };
+            {
+                Alias = "cte1",
+                Query = cteQuery
+            };
 
 
             var query = new Query();
@@ -86,7 +88,7 @@ namespace SqlModellerTests
                 .Fetch(5);
 
             var compiled = query.Compile();
-            
+
             Console.WriteLine(compiled.ParameterSql);
             Console.WriteLine(compiled.Sql);
 
@@ -107,9 +109,9 @@ namespace SqlModellerTests
             .OrderBy(string.Empty, "ProductName");
 
             var query = new Query().Select(selectQuery);
-            
+
             var compiled = query.Compile();
-             
+
             Console.WriteLine(compiled.Sql);
 
             // http://sqlfiddle.com/#!6/f9f24/9
@@ -156,10 +158,40 @@ namespace SqlModellerTests
 
             var query = new Query();
             query.CommonTableExpressions.Add(cte);
-            query.SelectQuery = new SelectQuery(selectDistinct: true) 
+            query.SelectQuery = new SelectQuery(selectDistinct: true)
                 .From(cte.Alias, cte.Alias)
                 .Select("ProductName")
                 .OrderBy(string.Empty, "ProductName");
+
+
+            var compiled = query.Compile(false);
+
+            Console.WriteLine(compiled.Sql);
+
+        }
+
+        [Test]
+        public void TestGroupedTableJoin()
+        {  
+            var contact = new Table("ct", "contact");
+            var phone = new Table("p", "phone");
+            var company = new Table("c", "company");
+            var network = new Table("pn", "phonenetwork");
+
+            var selectQuery = new SelectQuery().SelectAll().From(company)
+                     .GroupedJoin(contact, "company_id", company, "id",
+                         x => x.Join(phone, "contact_id", contact, "id")
+                               .Join(network, "id", phone, "network_id")
+                     );
+
+            var cte = new CommonTableExpression { Alias = "Cte", Query = selectQuery };
+
+            var query = new Query();
+            query.CommonTableExpressions.Add(cte);
+            query.SelectQuery = new SelectQuery()
+                .From(cte.Alias, cte.Alias)
+                .Select("CompanyName")
+                .OrderBy(string.Empty, "CompanyName");
 
 
             var compiled = query.Compile(false);

@@ -1,6 +1,8 @@
-﻿namespace SqlModeller.Model.From
+﻿using SqlModeller.Interfaces;
+
+namespace SqlModeller.Model.From
 {
-    public class TableJoin
+    public class TableJoin : ITableJoin
     {
         public JoinType JoinType { get; set; }
         public Table JoinTable { get; set; }

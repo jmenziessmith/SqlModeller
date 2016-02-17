@@ -56,6 +56,9 @@
     <Compile Include="Compiler\SqlServer\HavingCompilers\SqlHavingFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\HavingCompilers\HavingFilterCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\TableJoinCompilers\TableJoinCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\TableJoinCompilers\GroupedTableJoinTableJoinCompiler.cs" />
+    <Compile Include="Compiler\SqlServer\TableJoinCompilers\TableJoinTableJoinCompiler.cs" />
     <Compile Include="Compiler\SqlServer\ToStringHelper.cs" />
     <Compile Include="Compiler\SqlServer\UnionSelectQueryCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnContainsWhereFilterCompiler.cs" />
@@ -86,6 +89,8 @@
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnColumnWhereFilterCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\ColumnValueWhereFilterCompiler.cs" />
     <Compile Include="Interfaces\ISqlStatementCompiler.cs" />
+    <Compile Include="Interfaces\ITableJoin.cs" />
+    <Compile Include="Interfaces\ITableJoinCompiler.cs" />
     <Compile Include="Interfaces\IWhereCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCollectionCompiler.cs" />
     <Compile Include="Compiler\SqlServer\WhereCompilers\WhereFilterCompiler.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\ContainsMode.cs" />
     <Compile Include="Model\DatePart.cs" />
+    <Compile Include="Model\From\GroupedTableJoin.cs" />
     <Compile Include="Model\GroupBy\GroupByColumn.cs" />
     <Compile Include="Model\GroupBy\GroupByColumnDatePart.cs" />
     <Compile Include="Model\LikeMode.cs" />

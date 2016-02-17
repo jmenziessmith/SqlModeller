@@ -72,16 +72,12 @@ namespace SqlModeller.Compiler.SqlServer
                 selectQuery.FromTable.TableName, 
                 selectQuery.FromTable.Alias);
 
+
+            var joinCompiler = new TableJoinCompiler();
+
             foreach (var join in selectQuery.TableJoins)
             {
-                result += string.Format("\n\t {0} {1} AS {2} ON {2}.{3} = {4}.{5} {6} ",
-                    join.JoinType.ToSqlString(),
-                    join.JoinTable.TableName,
-                    join.JoinTable.Alias,
-                    join.JoinField.Name,
-                    join.ForeignColumn.TableAlias,
-                    join.ForeignColumn.Field.Name,
-                    join.Extra);
+                result += string.Format("\n\t {0}", joinCompiler.Compile(join, selectQuery, parameters));
             }
              
 

@@ -13,7 +13,7 @@ namespace SqlModeller.Model
         {
             SelectDistinct = selectDistinct;
             SelectColumns = new List<IColumnSelector>();
-            TableJoins = new List<TableJoin>();
+            TableJoins = new List<ITableJoin>();
             GroupByColumns = new List<IGroupByColumn>();
             WhereFilters = new WhereFilterCollection();
             HavingFilters = new HavingFilterCollection();
@@ -23,7 +23,7 @@ namespace SqlModeller.Model
         public bool SelectDistinct { get; set; }
         public List<IColumnSelector> SelectColumns { get; set; }
         public Table FromTable { get; set; }
-        public List<TableJoin> TableJoins { get; set; }
+        public List<ITableJoin> TableJoins { get; set; }
         public List<IGroupByColumn> GroupByColumns { get; set; }
         public List<OrderByColumn> OrderByColumns { get; set; }
         public WhereFilterCollection WhereFilters { get; set; }
