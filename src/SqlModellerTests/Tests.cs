@@ -34,6 +34,8 @@ namespace SqlModellerTests
                     .Select(teamTable, "ID", "T_ID", Aggregate.Min)
                     .Select(teamTable, "Name", "T_NAME", Aggregate.Avg)
                     .Select(playerTable, "Name", "P_NAME", Aggregate.Sum)
+                    .Select(playerTable, "IsMale", "P_ALLMALE", Aggregate.Bit)
+                    .Select(playerTable, "IsProfessional", "P_HASPRO", Aggregate.BitMax)
             // FROM
                 .From(countryTable)
                     .LeftJoin(teamTable, "CountryID", countryTable, "ID")

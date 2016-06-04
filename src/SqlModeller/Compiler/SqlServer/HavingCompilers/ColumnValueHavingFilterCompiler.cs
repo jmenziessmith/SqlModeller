@@ -20,7 +20,7 @@ namespace SqlModeller.Compiler.SqlServer.HavingCompilers
 
                 return string.Format("{0}({1}ISNULL({2},{3})) {4} {5}",
                     having.Aggregate.ToSqlString(),
-                    having.Aggregate == Aggregate.Bit ? "0+" : null, // fix bit field aggregation for nulls
+                    having.Aggregate == Aggregate.Bit || having.Aggregate == Aggregate.BitMax ? "0+" : null, // fix bit field aggregation for nulls
                     having.LeftColumn.FullName,
                     isnullQuotes + having.IsNullValue + isnullQuotes,
                     having.Operator.ToSqlString(),
@@ -30,7 +30,7 @@ namespace SqlModeller.Compiler.SqlServer.HavingCompilers
             
             return string.Format("{0}({1}{2}) {3} {4}",
                 having.Aggregate.ToSqlString(),
-                having.Aggregate == Aggregate.Bit ? "0+" : null, // fix bit field aggregation for nulls
+                having.Aggregate == Aggregate.Bit || having.Aggregate == Aggregate.BitMax ? "0+" : null, // fix bit field aggregation for nulls
                 having.LeftColumn.FullName,
                 having.Operator.ToSqlString(),
                 valueString

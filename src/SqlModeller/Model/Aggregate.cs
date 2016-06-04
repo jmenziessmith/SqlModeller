@@ -10,6 +10,7 @@
         Avg,
         Count,
         Bit,
+        BitMax,
     }
 
     public static class AggregateExtensions
@@ -23,6 +24,10 @@
             if (value == Aggregate.Bit)
             {
                 return Aggregate.Min.ToString().ToUpper();
+            }
+            if (value == Aggregate.BitMax)
+            {
+                return Aggregate.Max.ToString().ToUpper();
             }
 
             return value.ToString().ToUpper();

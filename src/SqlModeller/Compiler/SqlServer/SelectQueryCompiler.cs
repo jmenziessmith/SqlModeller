@@ -135,7 +135,7 @@ namespace SqlModeller.Compiler.SqlServer
                 {
                     fieldSelector = string.Format("{0}({1}{2}{3}{4})",
                         orderBy.Aggregate.ToSqlString(),
-                        orderBy.Aggregate == Aggregate.Bit ? "0+" : null, // fix bit field aggregation for nulls
+                        orderBy.Aggregate == Aggregate.Bit || orderBy.Aggregate == Aggregate.BitMax ? "0+" : null, // fix bit field aggregation for nulls
                         orderBy.TableAlias,
                         string.IsNullOrWhiteSpace(orderBy.TableAlias) ? null : ".",
                         orderBy.Field.Name
